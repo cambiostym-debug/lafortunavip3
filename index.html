@@ -14,12 +14,12 @@
     // Ejemplos: "grupo1", "grupo2", "grupo3", "vip", etc.
 
     var TAQUILLAS = [
-        { numero: "584127934614", imagen: "lafortu.png", peso: 1 },
-        { numero: "584124504816", imagen: "lafortu.png", peso: 1 },
-        { numero: "584129355672", imagen: "lafortu.png", peso: 1 },
-        { numero: "584128462572", imagen: "lafortu.png", peso: 1 },
-        { numero: "584144307457", imagen: "lafortu.png", peso: 1 },
-        { numero: "584125025947", imagen: "lafortu.png", peso: 1 },
+        { numero: "584127934614", imagen: "kriz.jpg", peso: 1 },
+        { numero: "584124504816", imagen: "johanna.jpg", peso: 1 },
+        { numero: "584129355672", imagen: "mila.jpg", peso: 1 },
+        { numero: "584128462572", imagen: "rosme.jpg", peso: 1 },
+        { numero: "584144307457", imagen: "ross.jpg", peso: 1 },
+        { numero: "584125025947", imagen: "vanesa.jpg", peso: 1 },
     ];
     var MENSAJE_INICIAL = "Hola! Quiero jugar 🎰 ¿Cómo hago?";
     // ═══════════════════════════════════════════════════════════
@@ -61,9 +61,13 @@
         var nextSlot = _slots[(counter || 0) % _slots.length];
         IMAGEN_OPERADORA = nextSlot.imagen;
         var img = document.getElementById('imgOperadora');
-        if (img) img.src = IMAGEN_OPERADORA;
+        if (img) { img.src = IMAGEN_OPERADORA; img.style.display = 'block'; }
     })
-    .catch(function() {});
+    .catch(function() {
+        var img = document.getElementById('imgOperadora');
+        if (img) { img.src = IMAGEN_OPERADORA; img.style.display = 'block'; }
+    });
+
 </script>
 <!-- ============================================= -->
 <head>
@@ -262,7 +266,7 @@
         </div>
         
         <!-- Tu imagen -->
-        <img id="imgOperadora" alt="Agencia La Fortuna" class="main-image">
+        <img id="imgOperadora" alt="Agencia La Fortuna" class="main-image" style="display: none;">
         
         <!-- Nota educativa ANTES del botón -->
         <p style="text-align: center; color: #FFD700; font-size: 15px; margin-bottom: 14px; line-height: 1.5;">
@@ -307,8 +311,7 @@
     </div>
     
     <script>
-        // Cargar imagen de la operadora desde la variable de arriba
-        document.getElementById('imgOperadora').src = IMAGEN_OPERADORA;
+        // La imagen se carga desde Firebase (peek) arriba
 
         // Enlace ofuscado para evitar rastreo de bots
         const _w1 = "https://wa.";
