@@ -14,12 +14,7 @@
     // Ejemplos: "grupo1", "grupo2", "grupo3", "vip", etc.
 
     var TAQUILLAS = [
-        { numero: "584127934614", imagen: "kriz.jpg", peso: 1 },
-        { numero: "584124504816", imagen: "johanna.jpg", peso: 1 },
         { numero: "584129355672", imagen: "mila.jpg", peso: 1 },
-        { numero: "584128462572", imagen: "rosme.jpg", peso: 1 },
-        { numero: "584144307457", imagen: "ross.jpg", peso: 1 },
-        { numero: "584125025947", imagen: "vanesa.jpg", peso: 1 },
     ];
     var MENSAJE_INICIAL = "Hola! Quiero jugar 🎰 ¿Cómo hago?";
     // ═══════════════════════════════════════════════════════════
@@ -30,12 +25,12 @@
     // Construir slots intercalados por peso (soporta decimales: 1, 1.5, 2, 3)
     function _buildSlots(taquillas) {
         // Multiplicar por 10 para eliminar decimales
-        var pesos = taquillas.map(function(t) { return Math.round(t.peso * 10); });
+        var pesos = taquillas.map(function (t) { return Math.round(t.peso * 10); });
         function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
         var g = pesos[0];
         for (var i = 1; i < pesos.length; i++) g = gcd(g, pesos[i]);
-        var norm = taquillas.map(function(t, idx) { return { t: t, s: pesos[idx] / g, p: 0 }; });
-        var total = norm.reduce(function(sum, n) { return sum + n.s; }, 0);
+        var norm = taquillas.map(function (t, idx) { return { t: t, s: pesos[idx] / g, p: 0 }; });
+        var total = norm.reduce(function (sum, n) { return sum + n.s; }, 0);
         var seq = [];
         for (var pos = 0; pos < total; pos++) {
             var best = -1, bestR = Infinity;
@@ -57,50 +52,55 @@
 
     // Peek: leer contador SIN incrementar para saber quién le toca
     fetch(FIREBASE_URL + '/rotador_' + NOMBRE_ROTADOR + '/counter.json')
-    .then(function(r) { return r.json(); })
-    .then(function(counter) {
-        _taquillaAsignada = _slots[(counter || 0) % _slots.length];
-        IMAGEN_OPERADORA = _taquillaAsignada.imagen;
-        var img = document.getElementById('imgOperadora');
-        if (img) { img.src = IMAGEN_OPERADORA; img.style.display = 'block'; }
-    })
-    .catch(function() {
-        var img = document.getElementById('imgOperadora');
-        if (img) { img.src = IMAGEN_OPERADORA; img.style.display = 'block'; }
-    });
+        .then(function (r) { return r.json(); })
+        .then(function (counter) {
+            _taquillaAsignada = _slots[(counter || 0) % _slots.length];
+            IMAGEN_OPERADORA = _taquillaAsignada.imagen;
+            var img = document.getElementById('imgOperadora');
+            if (img) { img.src = IMAGEN_OPERADORA; img.style.display = 'block'; }
+        })
+        .catch(function () {
+            var img = document.getElementById('imgOperadora');
+            if (img) { img.src = IMAGEN_OPERADORA; img.style.display = 'block'; }
+        });
 
 </script>
 <!-- ============================================= -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agencia La Fortuna | Tu Taquilla Online de Confianza</title>
-    <meta name="description" content="Escríbenos directo por WhatsApp. Sellamos tus jugadas de animalitos, triples, tripletas y pollas. Atención personalizada.">
-    
+    <meta name="description"
+        content="Escríbenos directo por WhatsApp. Sellamos tus jugadas de animalitos, triples, tripletas y pollas. Atención personalizada.">
+
     <!-- Facebook Pixel Code -->
     <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1191313203218028');
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1635094324367466');
         fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=1191313203218028&ev=PageView&noscript=1"/></noscript>
+            src="https://www.facebook.com/tr?id=1635094324367466&ev=PageView&noscript=1" /></noscript>
     <!-- End Facebook Pixel Code -->
-    
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
@@ -110,7 +110,7 @@
             align-items: center;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 420px;
             width: 100%;
@@ -120,12 +120,12 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(138, 43, 226, 0.2);
             border: 1px solid rgba(255, 215, 0, 0.2);
         }
-        
+
         .header {
             text-align: center;
             margin-bottom: 25px;
         }
-        
+
         .logo-container {
             display: flex;
             justify-content: center;
@@ -133,20 +133,20 @@
             gap: 15px;
             margin-bottom: 15px;
         }
-        
+
         .brand-name {
             color: #FFD700;
             font-size: 28px;
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-        
+
         .subtitle {
             color: #E0E0E0;
             font-size: 16px;
             margin-bottom: 10px;
         }
-        
+
         .main-image {
             width: calc(100% + 20px);
             margin-left: -10px;
@@ -155,11 +155,11 @@
             margin-bottom: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
-        
+
         .benefits {
             margin-bottom: 25px;
         }
-        
+
         .benefit-item {
             display: flex;
             align-items: center;
@@ -170,16 +170,16 @@
             margin-bottom: 10px;
             border-left: 3px solid #25D366;
         }
-        
+
         .benefit-icon {
             font-size: 20px;
         }
-        
+
         .benefit-text {
             color: #FFFFFF;
             font-size: 15px;
         }
-        
+
         .operators {
             text-align: center;
             padding: 15px;
@@ -188,13 +188,13 @@
             margin-bottom: 25px;
             border: 1px solid rgba(255, 215, 0, 0.3);
         }
-        
+
         .operators-text {
             color: #FFD700;
             font-size: 14px;
             font-weight: 600;
         }
-        
+
         .cta-button {
             display: block;
             width: 100%;
@@ -214,77 +214,84 @@
             letter-spacing: 1px;
             margin-bottom: 20px;
         }
-        
+
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
         }
-        
+
         .cta-button:active {
             transform: translateY(-1px);
         }
-        
+
         .whatsapp-icon {
             margin-right: 10px;
             font-size: 22px;
         }
-        
+
         .contact {
             text-align: center;
             margin-top: 25px;
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .contact-text {
             color: #A0A0A0;
             font-size: 14px;
         }
-        
+
         .contact-link {
             color: #FFD700;
             text-decoration: none;
         }
-        
+
         /* Animación del botón */
         @keyframes pulse {
-            0% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4); }
-            50% { box-shadow: 0 8px 35px rgba(37, 211, 102, 0.6); }
-            100% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4); }
+            0% {
+                box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 8px 35px rgba(37, 211, 102, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            }
         }
-        
+
         .cta-button {
             animation: pulse 2s infinite;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
             <div class="logo-container">
-                <span class="brand-name" style="font-size: 18px; white-space: nowrap;">🎰 AGENCIA ONLINE LA FORTUNA</span>
+                <span class="brand-name" style="font-size: 18px; white-space: nowrap;">🎰 AGENCIA ONLINE LA
+                    FORTUNA</span>
             </div>
         </div>
-        
+
         <!-- Tu imagen -->
         <img id="imgOperadora" alt="Agencia La Fortuna" class="main-image" style="display: none;">
-        
+
         <!-- Nota educativa ANTES del botón -->
         <p style="text-align: center; color: #E0E0E0; font-size: 15px; margin-bottom: 12px; line-height: 1.5;">
             💬 Escríbenos directo y te atendemos al instante.<br>
             <strong style="color: #25D366; font-size: 16px;">¡Tu taquilla online!</strong><br>
             <span style="font-size: 15px; color: #FFD700;">💚 Solo dale "Continuar" y listo</span>
         </p>
-        
+
         <!-- Botón con enlace camuflado -->
-        <a href="javascript:void(0)" 
-           class="cta-button" 
-           id="joinButton"
-           onclick="contactarTaquilla()">
+        <a href="javascript:void(0)" class="cta-button" id="joinButton" onclick="contactarTaquilla()">
             <span class="whatsapp-icon">📱</span>
             ESCRIBIR POR WHATSAPP
         </a>
-        
+
         <div class="benefits">
             <div class="benefit-item">
                 <span class="benefit-icon">✅</span>
@@ -300,25 +307,26 @@
                 <span class="benefit-text">Atención directa y personalizada</span>
             </div>
         </div>
-        
+
         <div class="operators">
             <span class="operators-text">🏆 Tu agencia de confianza — Pago seguro y rápido</span>
         </div>
-        
+
         <div class="contact">
             <p class="contact-text">
-                📸 <a href="https://instagram.com/AG.LAFORTUNA" class="contact-link">@AG.LAFORTUNA</a> — <strong style="color: #FFD700;">+2.300 seguidores</strong>
+                📸 <a href="https://instagram.com/AG.LAFORTUNA" class="contact-link">@AG.LAFORTUNA</a> — <strong
+                    style="color: #FFD700;">+2.300 seguidores</strong>
             </p>
         </div>
     </div>
-    
+
     <script>
         // La imagen se carga desde Firebase (peek) arriba
 
         // Enlace ofuscado para evitar rastreo de bots
         const _w1 = "https://wa.";
         const _w2 = "me/";
-        
+
         var _yaClickeado = false;
         function contactarTaquilla() {
             if (_yaClickeado) return; // Evitar doble click
@@ -334,7 +342,7 @@
 
             // Redirect INMEDIATO (como indexsolitario) - no espera Firebase
             var msg = encodeURIComponent(MENSAJE_INICIAL);
-            setTimeout(function() {
+            setTimeout(function () {
                 window.location.href = _w1 + _w2 + _taquillaAsignada.numero + "?text=" + msg;
             }, 300);
 
@@ -355,4 +363,5 @@
         }
     </script>
 </body>
+
 </html>
